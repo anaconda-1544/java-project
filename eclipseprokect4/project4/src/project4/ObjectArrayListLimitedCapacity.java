@@ -1,21 +1,23 @@
 package project4;
+
 import java.util.Arrays;
 
-public class ObjectArrayListLimitedCapacity { //교수님의 조건에 맞게 만들기
-	private Object[] array;
-	private int size;
-	private static final int DEFAULT_CAPACITY = 10; //10으로 고정하기!\
-	
-	public ObjectArrayListLimitedCapacity(int capacity) {
-		array = new Object[capacity];
-		size = 0;
-	}
-	
-	public int size () {
-		return size;
-	}
-	
-	
+public class ObjectArrayListLimitedCapacity {
+    protected Object[] array;
+    protected int size;
+    private static final int DEFAULT_CAPACITY = 10;
+
+    public ObjectArrayListLimitedCapacity(int capacity) {
+        array = new Object[capacity];
+        size = 0;
+    }
+    
+    // ArrayList의 크기를 반환합니다.
+    public int size() {
+        return size;
+    }
+    
+    // 지정된 인덱스에 요소를 추가합니다.
     public void add(int index, Object o) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
@@ -28,12 +30,12 @@ public class ObjectArrayListLimitedCapacity { //교수님의 조건에 맞게 �
         size++;
     }
     
-	
+    // ArrayList가 비어 있는지 확인합니다.
     public boolean isEmpty() {
         return size == 0;
     }
     
-    
+    // 지정된 인덱스의 요소를 반환합니다.
     public Object get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
@@ -41,25 +43,24 @@ public class ObjectArrayListLimitedCapacity { //교수님의 조건에 맞게 �
         return array[index];
     }
     
-    
-    
+    // ArrayList의 끝에 요소를 추가합니다.
     public void add(Object o) {
         add(size, o);
     }
 
+    // 지정된 인덱스의 요소를 제거하고 반환합니다.
     public Object remove(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
         Object removedElement = array[index];
         System.arraycopy(array, index + 1, array, index, size - index - 1);
-        array[size - 1] = null; // 메모리 누수 때문에 필요
+        array[size - 1] = null;
         size--;
         return removedElement;
     }
     
-    
-    // 테스트하게 하는 메소드
+    // 테스트 메소드
     public static void main(String[] args) {
         ObjectArrayListLimitedCapacity list = new ObjectArrayListLimitedCapacity(5);
         System.out.println("Is list empty? " + list.isEmpty());
@@ -82,11 +83,4 @@ public class ObjectArrayListLimitedCapacity { //교수님의 조건에 맞게 �
         System.out.println("List after removing element at index 1: " + Arrays.toString(list.array));
         System.out.println("List size: " + list.size());
     }
-    
-    
-    
-    
-    
-    
-    
 }
