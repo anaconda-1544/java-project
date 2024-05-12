@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class ObjectArrayListLimitedCapacity {
     protected Object[] array;
     protected int size;
-    private static final int DEFAULT_CAPACITY = 10;
 
     public ObjectArrayListLimitedCapacity(int capacity) {
         array = new Object[capacity];
@@ -20,7 +19,7 @@ public class ObjectArrayListLimitedCapacity {
     // 지정된 인덱스에 요소를 추가합니다.
     public void add(int index, Object o) {
         if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+            throw new IndexOutOfBoundsException("인덱스: " + index + ", 크기: " + size);
         }
         if (size == array.length) {
             array = Arrays.copyOf(array, array.length * 2);
@@ -38,7 +37,7 @@ public class ObjectArrayListLimitedCapacity {
     // 지정된 인덱스의 요소를 반환합니다.
     public Object get(int index) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+            throw new IndexOutOfBoundsException("인덱스: " + index + ", 크기: " + size);
         }
         return array[index];
     }
@@ -51,7 +50,7 @@ public class ObjectArrayListLimitedCapacity {
     // 지정된 인덱스의 요소를 제거하고 반환합니다.
     public Object remove(int index) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+            throw new IndexOutOfBoundsException("인덱스: " + index + ", 크기: " + size);
         }
         Object removedElement = array[index];
         System.arraycopy(array, index + 1, array, index, size - index - 1);
@@ -63,24 +62,24 @@ public class ObjectArrayListLimitedCapacity {
     // 테스트 메소드
     public static void main(String[] args) {
         ObjectArrayListLimitedCapacity list = new ObjectArrayListLimitedCapacity(5);
-        System.out.println("Is list empty? " + list.isEmpty());
-        System.out.println("List size: " + list.size());
+        System.out.println("리스트 Empty 여부: " + list.isEmpty());
+        System.out.println("리스트 크기: " + list.size());
 
-        list.add(10);
-        list.add(20);
-        list.add(30);
+        list.add(100);
+        list.add(200);
+        list.add(300);
 
-        System.out.println("List after adding elements: " + Arrays.toString(list.array));
-        System.out.println("List size: " + list.size());
+        System.out.println("요소를 추가한 후의 리스트: " + Arrays.toString(list.array));
+        System.out.println("리스트 크기: " + list.size());
 
-        list.add(1, 15);
-        System.out.println("List after adding 15 at index 1: " + Arrays.toString(list.array));
-        System.out.println("List size: " + list.size());
+        list.add(1, 150); //2번째 자리에 150 추가
+        System.out.println("인덱스 1에 150를 추가한 후의 리스트: " + Arrays.toString(list.array));
+        System.out.println("리스트 크기: " + list.size());
 
-        System.out.println("Element at index 2: " + list.get(2));
+        System.out.println("인덱스 2의 요소: " + list.get(2));
 
-        System.out.println("Removed element: " + list.remove(1));
-        System.out.println("List after removing element at index 1: " + Arrays.toString(list.array));
-        System.out.println("List size: " + list.size());
+        System.out.println("제거된 요소: " + list.remove(1));
+        System.out.println("인덱스 1의 요소를 제거한 후의 리스트: " + Arrays.toString(list.array));
+        System.out.println("리스트 크기: " + list.size());
     }
 }
